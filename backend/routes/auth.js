@@ -7,15 +7,19 @@ const isAuth = (req, res, next) =>
 				? next()
 				: res.status(401).json({ message: 'Unauthorized'})
 
-router.get('/logout', (req, res) => {
-	req.logOut();
-	res.status(200).clearCookie('connect.sid', {
-		path: '/'
-	});
-	req.session.destroy((e) => {
-		res.redirect('/');
-	});
-});
+router.get('/logout',isAuth, (req, res) => {
+	req.logout()
+	req.session.destroy((err) => {
+		if(!err) {
+			res.status(200).clearCookie('connect.sid', {path: '/'}).json({message: "Logged Out"})
+		}
+	})
+})
+
+router.post('/login', passport.authenticate('local'), (req, res, next) => {
+	console.log(req)
+	res.status(200).json(req.user)
+})
 
 router.post('/signup', (req, res, next) => {
 	Human.register({ ...req.body }, req.body.password)
@@ -24,22 +28,7 @@ router.post('/signup', (req, res, next) => {
 })
 
 
-router.post('/login', (req, res, next) => {
-	passport.authenticate('local', function(err, user, info) {
-		if (err) {
-			return next(err)
-		}
-		if (!user) {
-			return res.status(401).json({ message: 'Unauthorized' })
-		}
-		req.logIn(user, function(err) {
-			if (err) {
-				return next(err)
-			}
-			return res.status(200).json(user)
-		})
-	})(req, res, next)
-})
+
 
 router.get('/profile', isAuth, (req, res, next) => {
 	res.status(200).json(req.user)
