@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const Human = require('../models/Human')
+const User = require('../models/User')
 const passport = require('passport')
 
 const isAuth = (req, res, next) =>
@@ -22,13 +22,10 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
 })
 
 router.post('/signup', (req, res, next) => {
-	Human.register({ ...req.body }, req.body.password)
+	User.register({ ...req.body }, req.body.password)
 			.then(user => res.status(201).json(user))
 			.catch(err => res.json(err))
 })
-
-
-
 
 router.get('/profile', isAuth, (req, res, next) => {
 	res.status(200).json(req.user)

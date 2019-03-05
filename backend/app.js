@@ -40,8 +40,13 @@ const MongoStore = require("connect-mongo")(session);
 const sessionOpts = {
   secret: process.env.SECRET,
   resave: false,
+  httpOnly: true,
   saveUninitialized: true,
-  cookie: { httpOnly: true, maxAge: 2419200000 }
+  cookie: { httpOnly: true, maxAge: 2419200000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
 }
 
 app.use(cors(corsOpts))
@@ -66,6 +71,6 @@ app.use(passport.session())
 const index = require('./routes/index');
 app.use('/', index);
 let auth = require('./routes/auth')
-app.use('/auth', auth)
+app.use('/', auth)
 
 module.exports = app;

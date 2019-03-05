@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
-const PLM = require('passport-local-mongoose')
+const passportLocalMongoose = require('passport-local-mongoose')
 const Schema = mongoose.Schema
 
-let humanSchema = new Schema({
+let userSchema = new Schema({
 	email: {
 		type: String,
 		required: "Debes de tener un email activo para poder registrarte",
@@ -37,5 +37,5 @@ let humanSchema = new Schema({
 	}],
 },{ timestamps: true })
 
-humanSchema.plugin(PLM, { usernameField: 'email' })
-module.exports = mongoose.model('Human', humanSchema)
+userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })
+module.exports = mongoose.model('User', userSchema)
