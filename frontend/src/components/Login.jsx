@@ -11,7 +11,6 @@ class Login extends React.Component {
 		let { auth } = this.state
 		auth[e.target.name] = e.target.value
 		this.setState({ auth })
-
 	}
 
 	sendToServer = () => {
@@ -20,7 +19,7 @@ class Login extends React.Component {
 		axios.post(url, auth, { withCredentials: true })
 				.then(res => {
 					console.log(res)
-					this.props.history.push('/')
+					this.props.history.push('/profile')
 				})
 				.catch(e => {
 					alert("nanai")

@@ -1,26 +1,22 @@
 import React from 'react'
 import axios from 'axios'
-const url = "http://localhost:3000/imageProfile"
-const serviceUpload  = axios.create({url, withCredentials: true})
 
 class Profile extends React.Component {
+
 	state = {
 		privateInfo: {},
 		authorized: false,
 		profilePic: {},
-		respo: {}
 	}
 
 	componentDidMount() {
 		this.getPrivateData()
 	}
 
-
 	getPrivateData = () => {
-		let url = "http://localhost:3000/private"
+		let url = "http://localhost:3000/profile"
 		axios.get(url, { withCredentials: true })
 				.then(res => {
-
 					this.setState({ privateInfo: res.data, authorized: true })
 				})
 				.catch(e => {
@@ -29,52 +25,13 @@ class Profile extends React.Component {
 				})
 	}
 
-	handleChange = (e) => {
-		this.setState({profilePic: e.target.files[0]})
-	}
-
-	handleSubmit = () => {
-		const { privateInfo } = this.state
-		this.subeImagen(this.state.profilePic, url)
-				.then(res => {
-					privateInfo.photo = res.profilePic
-					this.setState({ privateInfo })
-				})
-	}
-
-	subeImagen = (file, url) => {
-		const formData = new FormData()
-		formData.append('picture', file)
-		return serviceUpload.post(url, formData, {headers: {
-				'Content-Type': 'multipart/form-data',
-			},})
-				.then( (res) => res.data )
-				.catch( e => console.log(e))
-	}
-
-
 	render() {
-		let { privateInfo } = this.state
-		console.log(privateInfo)
-		if(this.state.authorized) {
-			return(
-					<div>
-						<h2>{privateInfo.message}</h2>
-						<h1>{privateInfo.name}</h1>
-						<img src={privateInfo.photo} alt=""/>
-						<label >Deseas cambiar tu foto de perfil</label>
-						<input type="file" onChange={this.handleChange}/>
-						<button onClick={this.handleSubmit}>Vamos pues!</button>
-					</div>
-			)
-		}else {
-			return (
-					<div>
-						<h1>Home</h1>
-						<p>Loggeate primero bro</p>
-					</div>
-			)
-		}
+		return(
+			<div>
+				<h1>{this.state.privateInfo.name}</h1>
+				<img src={this.state.privateInfo.photo} alt={this.state.privateInfo.name}/>
+			</div>
+		)
 	}
 }
 

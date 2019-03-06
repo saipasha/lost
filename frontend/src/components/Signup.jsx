@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+let uploadCloudinary =
 
 class Signup extends React.Component {
 

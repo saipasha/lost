@@ -44,7 +44,17 @@ let petSchema = new Schema ({
 		type: Boolean,
 		default: false,
 	},
+	lost: {
+		type: Boolean,
+		default: false,
+	},
 	newOwner: {
+		type: Schema.Types.ObjectId,
+	},
+	petTrainingCentre: {
+		type: Schema.Types.ObjectId,
+	},
+	petClinic: {
 		type: Schema.Types.ObjectId,
 	},
 },{timestamps:true})
