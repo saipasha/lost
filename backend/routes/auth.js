@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const User = require('../models/User')
 const passport = require('passport')
+const uploadCloud = require('../helpers/cloudinary')
 
 const isAuth = (req, res, next) =>
 		req.isAuthenticated()
@@ -21,7 +22,7 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
 	res.status(200).json(req.user)
 })
 
-router.post('/signup', (req, res, next) => {
+router.post('/signup', uploadCloud.single('profilePhoto'), (req, res, next) => {
 	User.register({ ...req.body }, req.body.password)
 			.then(user => res.status(201).json(user))
 			.catch(err => res.json(err))
