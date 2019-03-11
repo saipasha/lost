@@ -33,7 +33,7 @@ class Login extends React.Component {
 					<br />
 					<input onChange={this.handleChange} placeholder="tu password" name="password" type="password" />
 					<br />
-					<button onClick={this.sendToServer} >Iniciar</button>
+					<button onClick={this.sendToServer}>Iniciar</button>
 				</div>
 		)
 	}

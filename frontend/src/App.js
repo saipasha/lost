@@ -1,40 +1,15 @@
 import React, { Component } from 'react'
 import './App.css'
-import Routes from './Routes';
-import { NavLink } from 'react-router-dom'
-import axios from 'axios'
+import Home from './components/Home'
 
 class App extends Component {
 
-
-  logOut = () => {
-    axios.get("http://localhost:3000/logout", { withCredentials: true })
-      .then(res => {
-        console.log(res)
-      })
-  }
-
   render() {
     return (
-        <div>
-          <nav>
-            <NavLink to="/" >
-              Inicio
-            </NavLink>
-            <NavLink to="/signup" >
-              Registrate
-            </NavLink>
-            <NavLink to="/login" >
-              Inicia sesión
-            </NavLink>
-            <button onClick={this.logOut()}>
-              Cerrar sesión
-            </button>
-          </nav>
-          <Routes />
-        </div>
+        <Home />
     )
   }
+
 }
 
 export default App;
