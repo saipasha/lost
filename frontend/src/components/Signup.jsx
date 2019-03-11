@@ -21,21 +21,17 @@ class Signup extends React.Component {
 	}
 
 	handleImageChange = (e) => {
-		let { newUser, profilePhoto } = this.state
-		profilePhoto = e.target.files[0]
-		// newUser["profilePhoto"] = e.target.files[0]
-		
-		this.setState({newUser, profilePhoto})
+		let { profilePhoto } = this.state
+		profilePhoto = e.target.files[0] 
+		this.setState({profilePhoto})
 	}
 
-	handleImageSubmit = (e) => {
+	sendToServer = (e) => {
 		e.preventDefault()
 		let url= "http://localhost:3000/signup"
 		let {profilePhoto, newUser} = this.state
-		const formData = new FormData()
-		console.log(newUser, profilePhoto)				
+		const formData = new FormData()		
 		for(let key in newUser){
-			console.log(key)
 			formData.append(key, newUser[key])
 		}		
 		formData.append("picture", profilePhoto)
@@ -45,21 +41,10 @@ class Signup extends React.Component {
 				'Content-type': 'multipart/form-data',
 			}
 		})
-			.then(res => console.log(res.data))
+			.then(res => console.log(res))
 			.catch(e => console.log(e))
 	}
-	
 
-	sendToServer = () => {
-		let { newUser } = this.state
-		let url = "http://localhost:3000/signup"
-		axios.post(url, newUser)
-				.then(res => {
-					console.log("Nuevo usuario ? ", res)
-					this.props.history.push('/profile')
-				})
-				.catch(e => console.log(e))
-	}
 
 	render() {
 		const { errors } = this.state
@@ -85,7 +70,7 @@ class Signup extends React.Component {
 						<br />
 						<input onChange={this.handleChange} placeholder="Rewrite your password" name="password2" type="password" />
 						<p style={{ color: "red" }}>{errors.password}</p> {/*Add Toastr*/}
-						<button onClick={this.handleImageSubmit}>Registrarse</button>
+						<button onClick={this.sendToServer}>Registrarse</button>
 					</div>
 					<div>
 						<h5>Tienes una cuenta?</h5>

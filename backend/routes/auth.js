@@ -23,10 +23,9 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
 })
 
 router.post('/signup', uploadCloud.single('picture'), (req, res, next) => { 
-	
 	 User.register({ ...req.body, profilePhoto: req.file.url }, req.body.password)
 			.then(user => {
-				console.log(...req.body)
+				console.log(user)
 				res.status(201).json(user)
 			}
 				)
