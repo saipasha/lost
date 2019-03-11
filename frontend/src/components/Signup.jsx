@@ -6,8 +6,10 @@ class Signup extends React.Component {
 
 	state = {
 		newUser: {},
+		profilePhoto: {},
 		errors: {}
 	}
+
 
 	handleChange = e => {
 		let { newUser, errors } = this.state
@@ -18,9 +20,35 @@ class Signup extends React.Component {
 		this.setState({ newUser, errors })
 	}
 
-	// handleImageChange = (e) => {
-	// 	this.setState({profilePic: e.target.files[0]})
-	// }
+	handleImageChange = (e) => {
+		let { newUser, profilePhoto } = this.state
+		profilePhoto = e.target.files[0]
+		// newUser["profilePhoto"] = e.target.files[0]
+		
+		this.setState({newUser, profilePhoto})
+	}
+
+	handleImageSubmit = (e) => {
+		e.preventDefault()
+		let url= "http://localhost:3000/signup"
+		let {profilePhoto, newUser} = this.state
+		const formData = new FormData()
+		console.log(newUser, profilePhoto)				
+		for(let key in newUser){
+			console.log(key)
+			formData.append(key, newUser[key])
+		}		
+		formData.append("picture", profilePhoto)
+		let serviceUpload = axios.create({url, withCredentials: true})
+		return serviceUpload.post(url, formData, {
+			headers: {
+				'Content-type': 'multipart/form-data',
+			}
+		})
+			.then(res => console.log(res.data))
+			.catch(e => console.log(e))
+	}
+	
 
 	sendToServer = () => {
 		let { newUser } = this.state
@@ -57,7 +85,7 @@ class Signup extends React.Component {
 						<br />
 						<input onChange={this.handleChange} placeholder="Rewrite your password" name="password2" type="password" />
 						<p style={{ color: "red" }}>{errors.password}</p> {/*Add Toastr*/}
-						<button onClick={this.sendToServer}>Registrarse</button>
+						<button onClick={this.handleImageSubmit}>Registrarse</button>
 					</div>
 					<div>
 						<h5>Tienes una cuenta?</h5>

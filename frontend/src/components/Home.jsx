@@ -4,6 +4,11 @@ import axios from "axios";
 
 class Home extends React.Component{
 
+	state={
+		user:{},
+		logged:{}
+	}
+
 	logOut = () => {
 		axios.get("http://localhost:3000/logout", { withCredentials: true })
 				.then(res => {
@@ -12,12 +17,8 @@ class Home extends React.Component{
 	}
 
 	render(){
-		let isAuth = (req, res, next) =>
-				req.isAuthenticated()
-						? next()
-						: res.status(401).json({ message: 'Unauthorized'})
 
-		if (isAuth) {
+		if (true) {
 			return (
 				<div>
 					<nav id="navBar">
@@ -27,7 +28,7 @@ class Home extends React.Component{
 					</nav>
 					<section className="banner">
 						<h2>¡Encuentra a tu mejor amigo!</h2>
-						<p>Lost es la base de datos más grande de perros perdidos de latinoamérica. Sólo ve a la sección de perros perdidos y filtra los anuncios para contactar a quién encontró a tu mascota.</p>
+						<p>Lost concentra todos los reportes de perros encontrados. Sólo ve a la sección de perros perdidos y filtra los anuncios para contactar a quién encontró a tu mascota.</p>
 						<Link to="lost"><button>BUSCAR</button></Link>
 					</section>
 					{/*<Lost />*/}
