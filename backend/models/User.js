@@ -24,17 +24,10 @@ let userSchema = new Schema({
 		type: String,
 		required: "Debes subir una foto de perfil",
 	},
-	petAppointments: [{
-		type: Schema.Types.ObjectId,
-	}],
 	petFlyers: [],
 	address: {
 		location: [],
 	},
-	homePhotos: [{
-		type: String,
-		required: false,
-	}],
 },{ timestamps: true })
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })

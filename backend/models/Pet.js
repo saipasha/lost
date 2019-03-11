@@ -14,17 +14,16 @@ let petSchema = new Schema ({
 		type: Number,
 		required: "Cada mascota necesita una edad aproximada",
 	},
-	species: {
-		type: String,
-		required: "Cada mascota necesita una especie",
-		enum: ["Perro", "Gato", "Hurón"],
-	},
 	size: {
 		type: String,
 		required: "Cada mascota necesita un tamaño aproximado",
 		enum: ["Pequeño", "Mediano", "Grande", "Gigante"],
 	},
-	careTaker: {
+	status: [{
+		type: String,
+		enum: ["Malnutrido", "Flaco", "Estómago Hinchado", "Lastimado de patas traseras", "Lastimado de patas delanteras", "Lastimado del cuerpo", "Señales de Maltrato"]
+	}],
+	rescuedBy: {
 		type: Schema.Types.ObjectId,
 		required: true,
 	},
@@ -37,24 +36,7 @@ let petSchema = new Schema ({
 		enum: ["Amigable con Otros Animales", "Amigable con Perros", "Amigable con Humanos", "Suelta Pelo", "Limpio", "Operado", "Juguetón", "Energético", "Pasivo", "Agresivo", "Con Cataratas", "En Entrenamiento", "En Rehabilitación", "Condición Inusual"],
 		required: "Cada mascota necesita al menos una característica que lo distinga"
 	}],
-	humanAppointments: [{
-		type: Schema.Types.ObjectId,
-	}],
-	adopted: {
-		type: Boolean,
-		default: false,
-	},
-	lost: {
-		type: Boolean,
-		default: false,
-	},
-	newOwner: {
-		type: Schema.Types.ObjectId,
-	},
-	petTrainingCentre: {
-		type: Schema.Types.ObjectId,
-	},
-	petClinic: {
+	givenTo: {
 		type: Schema.Types.ObjectId,
 	},
 },{timestamps:true})
