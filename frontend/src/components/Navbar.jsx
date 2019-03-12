@@ -27,8 +27,8 @@ class NavBar extends React.Component {
                       <div className="uk-position-right uk-navbar-nav uk-margin-large-right">
                         <li>
                           <a href="/profile">Cuenta</a>
-                          <div class="uk-navbar-dropdown" uk-dropdown>
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                          <div className="uk-navbar-dropdown" uk-dropdown="offset: 0">
+                            <ul className="uk-nav uk-navbar-dropdown-nav">
                               <li><a href="/login">Log In</a></li>
                               <li><a href="/signup">Sign Up</a></li>
                             </ul>

@@ -17,12 +17,9 @@ let petSchema = new Schema ({
 	size: {
 		type: String,
 		required: "Cada mascota necesita un tamaño aproximado",
-		enum: ["Pequeño", "Mediano", "Grande", "Gigante"],
+		enum: ["small", "medium", "large", "xlarge"],
 	},
-	status: [{
-		type: String,
-		enum: ["Malnutrido", "Flaco", "Estómago Hinchado", "Lastimado de patas traseras", "Lastimado de patas delanteras", "Lastimado del cuerpo", "Señales de Maltrato", "Sin Heridas"]
-	}],
+	status: [String],
 	rescuedBy: {
 		type: Schema.Types.ObjectId,
 		required: true,
@@ -31,11 +28,7 @@ let petSchema = new Schema ({
 		type: String,
 		required: "Cada mascota necesita una descripción"
 	},
-	characteristics: [{
-		type: String,
-		enum: ["Amigable con Otros Animales", "Amigable con Perros", "Amigable con Humanos", "Suelta Pelo", "Limpio", "Operado", "Juguetón", "Energético", "Pasivo", "Agresivo", "Con Cataratas", "En Entrenamiento", "En Rehabilitación", "Condición Inusual"],
-		required: "Cada mascota necesita al menos una característica que lo distinga"
-	}],
+	characteristics: [String],
 	givenTo: {
 		type: Schema.Types.ObjectId,
 	},

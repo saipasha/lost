@@ -13,12 +13,13 @@ router.get('/lost', (req, res, next)=>{
   .catch(e=>console.log(e))
 })
 
-router.post('/flyer', uploadCloud.single('picture'), isAuth, (req, res, next)=>{
-  Pet.register({ ...req.body, petPhotos: req.file.url, rescuedBy:req.user._id })
+router.post('/flyer', uploadCloud.array('images'), (req, res, next)=>{
+	console.log(req.body, req.files)
+  /*Pet.create({ ...req.body, petPhotos: req.file.url, rescuedBy:req.user._id })
 			.then(pet => {
 				res.status(201).json(pet)
 			})
-			.catch(e => res.json(e))
+			.catch(e => res.json(e))*/
 })
 
 router.get('/lost/:id', (req, res, next)=>{
