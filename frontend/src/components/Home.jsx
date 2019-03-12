@@ -1,41 +1,29 @@
 import React from 'react'
-import {NavLink, Link} from "react-router-dom";
-import axios from "axios";
+import {NavLink, Link} from "react-router-dom"
+import NavBar from './Navbar';
 
 class Home extends React.Component{
-
-	state={
-		user:{},
-		logged:{}
-	}
-
-	logOut = () => {
-		axios.get("http://localhost:3000/logout", { withCredentials: true })
-				.then(res => {
-					console.log(res)
-				})
-	}
 
 	render(){
 
 		if (true) {
 			return (
 				<div>
-					<nav id="navBar">
-						<NavLink to="/login"><h3>Log In</h3></NavLink>
-						<img src="/images/LOST-W.png" alt="Lost Logo" />
-						<NavLink to="/signup"><h3>Sign Up</h3></NavLink>
-					</nav>
+					<NavBar />
 					<section className="banner">
-						<h2>¡Encuentra a tu mejor amigo!</h2>
-						<p>Lost concentra todos los reportes de perros encontrados. Sólo ve a la sección de perros perdidos y filtra los anuncios para contactar a quién encontró a tu mascota.</p>
-						<Link to="lost"><button>BUSCAR</button></Link>
+						<div className="uk-cover-container" uk-height-viewport>
+							<h2 className="uk-heading-primary">¡Encuentra a tu mejor amigo!</h2>
+							<p>Lost concentra todos los reportes de perros encontrados. Sólo ve a la sección de perros perdidos y filtra los anuncios para contactar a quién encontró a tu mascota.</p>
+							<Link to="lost"><button className="uk-button uk-button-default">BUSCAR</button></Link>
+							<img src="/images/dogs.png" alt="dogs" uk-cover />
+						</div>
 					</section>
-					{/*<Lost />*/}
 					<section className="banner">
-						<h2>Encontraste una mascota perdida?</h2>
-						<p>Ingresa a la mascota a nuestra base de datos para que sus dueños puedan encontrarlo. Sigue las instrucciones en la form.</p>
-						<Link to="flyer"><button>PONER UN ANUNCIO</button></Link>
+						<div class="uk-height-xlarge uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" data-src="/images/lost-dog.jpg" uk-img>
+							<h2 className="uk-heading-primary">¿Encontraste una mascota perdida?</h2>
+							<p>Ingresa a la mascota a nuestra base de datos para que sus dueños puedan encontrarlo. Sigue las instrucciones en la form.</p>
+							<Link to="lost"><button className="uk-button uk-button-default">PONER UN ANUNCIO</button></Link>
+						</div>
 					</section>
 				</div>
 			)

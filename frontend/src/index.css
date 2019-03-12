@@ -1,5 +1,4 @@
 
-
 body {
   margin: 0;
   padding: 0;
@@ -52,7 +51,7 @@ code {
   margin-bottom: 50px;
 }
 
-.banner button {
+/* .banner button {
   background-color: #282c34;
   color: whitesmoke;
   text-decoration: none;
@@ -60,7 +59,7 @@ code {
   border-radius: 20px;
   font-weight: 800;
   letter-spacing: 1px;
-}
+} */
 
 .banner img {
   width: 80vw;
