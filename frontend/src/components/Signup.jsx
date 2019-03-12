@@ -16,7 +16,7 @@ class Signup extends React.Component {
 		newUser[e.target.name] = e.target.value
 		//validate
 		errors = {}
-		if (newUser.password2 !== newUser.password1) errors.password = "Please, type the same password"
+		if (newUser.password !== newUser.password2) errors.password = "Please, type the same password"
 		this.setState({ newUser, errors })
 	}
 
@@ -41,7 +41,10 @@ class Signup extends React.Component {
 				'Content-type': 'multipart/form-data',
 			}
 		})
-			.then(res => console.log(res))
+			.then(res => {
+				this.props.history.push('/profile')
+				console.log(res)
+			})
 			.catch(e => console.log(e))
 	}
 
@@ -51,9 +54,9 @@ class Signup extends React.Component {
 		return (
 				<div>
 					<div>
-						<h4>Adoption is serious stuff</h4>
-						<p>This platform is handling the lives of live beings, that's why we ask all of this information from each one of our users in order to make an appointment or post a flyer.</p>
-						<p>We won't share your info with anyone that has no direct interest in one of your flyers. Feel free to share with us.</p>
+						<h4>Crea tu Cuenta</h4>
+						<p>El objetivo de nuestra plataforma es reunir mascotas perdidas con sus familias, es por eso que requerimos todos los datos de este formulario de todos nuestros usuarios.</p>
+						<p>No compartiremos tu información con nadie que no esté interesado en contactarte por un anuncio. Siéntete seguro de compartir con nosotros.</p>
 					</div>
 					<div>
 						<input onChange={this.handleChange} placeholder="Your email" name="email" type="text" />

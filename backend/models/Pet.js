@@ -21,7 +21,7 @@ let petSchema = new Schema ({
 	},
 	status: [{
 		type: String,
-		enum: ["Malnutrido", "Flaco", "Estómago Hinchado", "Lastimado de patas traseras", "Lastimado de patas delanteras", "Lastimado del cuerpo", "Señales de Maltrato"]
+		enum: ["Malnutrido", "Flaco", "Estómago Hinchado", "Lastimado de patas traseras", "Lastimado de patas delanteras", "Lastimado del cuerpo", "Señales de Maltrato", "Sin Heridas"]
 	}],
 	rescuedBy: {
 		type: Schema.Types.ObjectId,

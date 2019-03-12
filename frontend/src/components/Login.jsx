@@ -16,9 +16,9 @@ class Login extends React.Component {
 	sendToServer = () => {
 		let { auth } = this.state
 		let url = "http://localhost:3000/login"
-		axios.post(url, auth,{ withCredentials: true } )
+		axios.post(url, auth, { withCredentials: true } )
 				.then(res => {
-					window.localStorage.setItem('user', res.data);
+					window.localStorage.setItem('user', res.data)
 					this.props.history.push('/profile')
 				})
 				.catch(e => {

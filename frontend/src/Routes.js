@@ -5,6 +5,7 @@ import Signup from './components/Signup'
 import Login from './components/Login'
 import Lost from './components/Lost'
 import Home from './components/Home'
+import Flyer from './components/Flyer'
 
 export default () => <Switch>
 	<Route exact path="/" component={Home}/>
@@ -12,4 +13,5 @@ export default () => <Switch>
 	<Route exact path="/login" component={Login} />
 	<Route exact path="/profile" component={Profile} />
 	<Route exact path="/lost" component={Lost} />
+	<Route exact path="/flyer" component={Flyer} />
 </Switch>

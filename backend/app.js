@@ -72,5 +72,7 @@ const index = require('./routes/index');
 app.use('/', index);
 let auth = require('./routes/auth')
 app.use('/', auth)
+let pets = require('./routes/pets')
+app.use('/', pets)
 
 module.exports = app;

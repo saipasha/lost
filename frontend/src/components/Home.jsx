@@ -19,10 +19,10 @@ class Home extends React.Component{
 						</div>
 					</section>
 					<section className="banner">
-						<div class="uk-height-xlarge uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" data-src="/images/lost-dog.jpg" uk-img>
+						<div className="uk-height-xlarge uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" data-src="/images/lost-dog.jpg" uk-img>
 							<h2 className="uk-heading-primary">¿Encontraste una mascota perdida?</h2>
 							<p>Ingresa a la mascota a nuestra base de datos para que sus dueños puedan encontrarlo. Sigue las instrucciones en la form.</p>
-							<Link to="lost"><button className="uk-button uk-button-default">PONER UN ANUNCIO</button></Link>
+							<Link to="flyer"><button className="uk-button uk-button-default">PONER UN ANUNCIO</button></Link>
 						</div>
 					</section>
 				</div>
