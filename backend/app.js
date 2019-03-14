@@ -74,9 +74,8 @@ let auth = require('./routes/auth')
 app.use('/', auth)
 let pets = require('./routes/pets')
 app.use('/', pets)
-
 app.use('*', (req, res)=>{
-  res.sendFile('index')
+  res.sendFile(path.join(__dirname, 'public', "index.html"))
 })
 
 module.exports = app;
