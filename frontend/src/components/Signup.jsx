@@ -152,15 +152,21 @@ class Signup extends React.Component {
 						<p style={{ color: "red" }}>{errors.password}</p>
 					</div>
 
-						<input type="file" onChange={this.handleImageChange} name="profilePhoto" />
-						<br />
-
-						<button onClick={this.sendToServer}>Registrarse</button>
+					<div className="js-upload" uk-form-custom="true">
+						<input type="file" multiple="false" onChange={this.handleImageChange} name="profilePhoto" />
+							<button className="uk-button uk-button-default" type="button" tabIndex="-1">Foto de Perfil</button>
 					</div>
 					<div>
-						<h5>Tienes una cuenta?</h5>
+						<button onClick={this.sendToServer} className="uk-button uk-button-primary uk-margin-small-top">Regístrate</button>
+					</div>
+					</div>
+
+					<div className="uk-margin-medium-top uk-text-center">
+						<div>
+								<h4 className="uk-margin-medium-top">Tienes una Cuenta?</h4>
+						</div>
 						<NavLink to="/login">
-							<button>Log In</button>
+							<button className="uk-button uk-button-default uk-margin-large-bottom">Log In</button>
 						</NavLink>
 					</div>
 				</div>
