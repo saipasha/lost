@@ -3,7 +3,7 @@ import axios from 'axios'
 import NavBar from './Navbar';
 import {Link} from "react-router-dom";
 
-const url = process.env.NODE_ENV !== "Production" ? "http://localhost:3000" : "tupinshidominio.com";
+const url = process.env.NODE_ENV !== "Production" ? "http://localhost:3000" : "https://lostpetsmexico.herokuapp.com";
 
 class Profile extends React.Component {
 

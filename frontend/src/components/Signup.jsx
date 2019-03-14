@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import {Link, NavLink} from 'react-router-dom'
 
+const url = process.env.NODE_ENV !== "Production" ? "http://localhost:3000" : "https://lostpetsmexico.herokuapp.com";
+
 class Signup extends React.Component {
 
 	state = {
@@ -33,7 +35,7 @@ class Signup extends React.Component {
 
 	sendToServer = (e) => {
 		e.preventDefault()
-		let url= "http://localhost:3000/signup"
+		let url= `${url}/signup`;
 		let {profilePhoto, newUser} = this.state
 		const formData = new FormData()		
 		for(let key in newUser){

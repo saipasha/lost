@@ -3,7 +3,7 @@ import axios from 'axios'
 import {searchByDescription} from "../services/report-services"
 import NavBar from "./Navbar";
 
-const url = process.env.NODE_ENV !== "Production" ? "http://localhost:3000" : "tupinshidominio.com";
+const url = process.env.NODE_ENV !== "Production" ? "http://localhost:3000" : "https://lostpetsmexico.herokuapp.com";
 
 class Lost extends React.Component {
 

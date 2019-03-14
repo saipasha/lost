@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 
-const url = process.env.NODE_ENV !== "Production" ? "http://localhost:3000" : "tupinshidominio.com";
+const url = process.env.NODE_ENV !== "Production" ? "http://localhost:3000" : "https://lostpetsmexico.herokuapp.com";
 
 class NavBar extends React.Component {
 
@@ -30,7 +30,7 @@ class NavBar extends React.Component {
 
 	logOut = () =>{
       console.log(this.props)
-		  axios.get("http://localhost:3000/logout", { withCredentials: true })
+		  axios.get(`${url}/logout`, { withCredentials: true })
 				.then(res => {
 					console.log(res)
          this.props.history.push('/')

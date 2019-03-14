@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import {Link} from "react-router-dom";
 
-const url = process.env.NODE_ENV !== "Production" ? "http://localhost:3000" : "tupinshidominio.com";
+const url = process.env.NODE_ENV !== "Production" ? "http://localhost:3000" : "https://lostpetsmexico.herokuapp.com";
 
 class Login extends React.Component {
 

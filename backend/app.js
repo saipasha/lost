@@ -75,4 +75,8 @@ app.use('/', auth)
 let pets = require('./routes/pets')
 app.use('/', pets)
 
+app.use('*', (req, res)=>{
+  res.send('/index')
+})
+
 module.exports = app;

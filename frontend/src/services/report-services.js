@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = process.env.NODE_ENV !== "Production" ? "http://localhost:3000" : "tupinshidominio.com";
+const url = process.env.NODE_ENV !== "Production" ? "http://localhost:3000" : "https://lostpetsmexico.herokuapp.com";
 
 export const createReport = data => {
 	return axios.post(`${url}/flyer`, data)
