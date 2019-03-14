@@ -17,16 +17,12 @@ let userSchema = new Schema({
 		required: "Debes de ingresar tu apellido",
 	},
 	phone: {
-		type: Number,
+		type: String,
 		required: "Debes de agregar un numero de telefono",
 	},
 	profilePhoto: {
 		type: String,
 		required: "Debes subir una foto de perfil",
-	},
-	petFlyers: [],
-	address: {
-		location: [],
 	},
 },{ timestamps: true })
 

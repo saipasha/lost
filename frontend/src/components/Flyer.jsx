@@ -1,47 +1,9 @@
 import React from 'react'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
+import {createReport} from '../services/report-services'
+import UIkit from 'uikit';
 
 class Signup extends React.Component {
-
-	/*state = {
-		newFlyer: {},
-		petPhotos: [],
-	}
-
-	handleChange = e => {
-		let { newFlyer } = this.state
-		newFlyer[e.target.name] = e.target.value
-		this.setState({ newFlyer })
-	}
-
-	handleImageChange = (e) => {
-		let { petPhotos } = this.state
-		petPhotos = e.target.files[0] 
-		this.setState({petPhotos})
-	}
-
-	sendToServer = (e) => {
-		e.preventDefault()
-		let url= "http://localhost:3000/flyer"
-		let {petPhotos, newFlyer} = this.state
-		const formData = new FormData()		
-		for(let key in newFlyer){
-			formData.append(key, newFlyer[key])
-		}		
-		formData.append("petPhotos", petPhotos)
-		let serviceUpload = axios.create({url, withCredentials: true})
-		return serviceUpload.post(url, formData, {
-			headers: {
-				'Content-type': 'multipart/form-data',
-			}
-		})
-			.then(res => {
-				this.props.history.push(`/lost/${res.data}`)
-				console.log(res)
-			})
-			.catch(e => console.log(e))
-	}*/
 
 	state = {
 		data: {
@@ -93,15 +55,26 @@ class Signup extends React.Component {
 		e.preventDefault();
 		const {data} = this.state;
 		let formdata = new FormData();
-		for(let key in data) {
-			if(key !== "images"){
+
+		for (let key in data) {
+			if (key !== "images" && key !== "characteristics") {
 				formdata.append(key, data[key]);
-			}else{
-				for(let i = 0 ; i < data.images.length; i++){
+			} else if (key === "images") {
+				for(let i = 0 ; i < data.images.length; i++) {
 					formdata.append("images", data.images[i])
 				}
+			} else {
+				formdata.append("characteristics", JSON.stringify(data[key]));
 			}
 		}
+		createReport(formdata)
+				.then(res=>{
+					UIkit.notification({
+						message: "Chi",
+						status: "success",
+					})
+					this.props.history.push('/lost')
+				})
 	};
 
 	render() {

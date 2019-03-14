@@ -1,11 +1,16 @@
 import React from 'react'
 import axios from 'axios'
-import {NavLink} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 
 class Signup extends React.Component {
 
 	state = {
-		newUser: {},
+		newUser: {
+			email: "",
+			name: "",
+			lastName: "",
+			phone: "",
+		},
 		profilePhoto: {},
 		errors: {}
 	}
@@ -16,7 +21,7 @@ class Signup extends React.Component {
 		newUser[e.target.name] = e.target.value
 		//validate
 		errors = {}
-		if (newUser.password !== newUser.password2) errors.password = "Please, type the same password"
+		if (newUser.password !== newUser.password2) errors.password = "Escribe la misma contraseña"
 		this.setState({ newUser, errors })
 	}
 
@@ -51,28 +56,105 @@ class Signup extends React.Component {
 
 	render() {
 		const { errors } = this.state
+		let {email} = this.state.newUser
+		let {name} = this.state.newUser
+		let {lastName} = this.state.newUser
+		let {phone} = this.state.newUser
 		return (
 				<div>
+				<div className="uk-margin-medium-top uk-text-center">
 					<div>
-						<h4>Crea tu Cuenta</h4>
-						<p>El objetivo de nuestra plataforma es reunir mascotas perdidas con sus familias, es por eso que requerimos todos los datos de este formulario de todos nuestros usuarios.</p>
-						<p>No compartiremos tu información con nadie que no esté interesado en contactarte por un anuncio. Siéntete seguro de compartir con nosotros.</p>
+						<Link to="/"><img className="uk-margin-small-top" src="/images/LOST-BK.png" alt="Lost Logo" width="150px" /></Link>
+						<div>
+							<h4 className="uk-margin-medium-top">Crea tu Cuenta</h4>
+							<p>El objetivo de nuestra plataforma es reunir mascotas perdidas con sus familias,<br /> es por eso que requerimos todos los datos de este formulario de todos nuestros usuarios.</p>
+						</div>
 					</div>
-					<div>
-						<input onChange={this.handleChange} placeholder="Your email" name="email" type="text" />
-						<br />
-						<input onChange={this.handleChange} placeholder="Your name" name="name" type="text" />
-						<br />
-						<input onChange={this.handleChange} placeholder="Your last name" name="lastName" type="text" />
-						<br />
+
+					<div className="uk-margin-small-top uk-width-1-3 uk-align-center">
+						<label className="uk-form-small uk-form-label" htmlFor="email">Email</label>
+						<div className="uk-form-controls">
+							<input
+									name="email"
+									className="uk-input"
+									id="email"
+									type="email"
+									placeholder="example@example.com"
+									onChange={this.handleChange}
+									value={email} />
+						</div>
+					</div>
+
+					<div className="uk-width-1-3 uk-align-center">
+						<label className="uk-form-small uk-form-label" htmlFor="name">Nombre</label>
+						<div className="uk-form-controls">
+							<input
+									name="name"
+									className="uk-input"
+									id="name"
+									type="text"
+									placeholder="Escribe tu nombre"
+									onChange={this.handleChange}
+									value={name} />
+						</div>
+					</div>
+
+					<div className="uk-width-1-3 uk-align-center">
+						<label className="uk-form-small uk-form-label" htmlFor="lastName">Apellido</label>
+						<div className="uk-form-controls">
+							<input
+									name="lastName"
+									className="uk-input"
+									id="lastName"
+									type="text"
+									placeholder="Escribe tus Apellidos"
+									onChange={this.handleChange}
+									value={lastName} />
+						</div>
+					</div>
+
+					<div className="uk-width-1-3 uk-align-center">
+						<label className="uk-form-small uk-form-label" htmlFor="phone">Número de Contacto</label>
+						<div className="uk-form-controls">
+							<input
+									name="phone"
+									className="uk-input"
+									id="phone"
+									type="text"
+									placeholder="Escribe tu número de celular"
+									onChange={this.handleChange}
+									value={phone} />
+						</div>
+					</div>
+
+					<div className="uk-width-1-3 uk-align-center">
+						<label className="uk-form-small uk-form-label" htmlFor="password">Password</label>
+						<div className="uk-form-controls">
+							<input
+									name="password"
+									className="uk-input"
+									id="password"
+									type="password"
+									placeholder="Escribe tu Contraseña"
+									onChange={this.handleChange} />
+						</div>
+					</div>
+
+					<div className="uk-width-1-3 uk-align-center">
+						<div className="uk-form-controls">
+							<input
+									name="password2"
+									className="uk-input"
+									type="password"
+									placeholder="Confirma tu Contraseña"
+									onChange={this.handleChange} />
+						</div>
+						<p style={{ color: "red" }}>{errors.password}</p>
+					</div>
+
 						<input type="file" onChange={this.handleImageChange} name="profilePhoto" />
 						<br />
-						<input onChange={this.handleChange} placeholder="Your phone number" name="phone" type="number" />
-						<br />
-						<input onChange={this.handleChange} placeholder="Set a password" name="password" type="password" />
-						<br />
-						<input onChange={this.handleChange} placeholder="Rewrite your password" name="password2" type="password" />
-						<p style={{ color: "red" }}>{errors.password}</p> {/*Add Toastr*/}
+
 						<button onClick={this.sendToServer}>Registrarse</button>
 					</div>
 					<div>

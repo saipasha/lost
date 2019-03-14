@@ -8,18 +8,46 @@ const isAuth = (req, res, next) =>
 				: res.status(401).json({ message: 'Unauthorized'})
 
 router.get('/lost', (req, res, next)=>{
-  Pet.find()
-  .then(pets=>res.status(200).json(pets))
-  .catch(e=>console.log(e))
+	let querys = Object.keys(req.query);
+	let query = {}
+	if(querys.length > 0){
+		querys.forEach(k=>{
+			query[k] = {$regex: req.query[k], $options: "gi"}
+		})
+
+		Pet.find(query)
+				.then(pets=>{
+					return res.status(200).json({pets})
+				})
+				.catch(e=>console.log(e))
+	}
+
+	Pet.find()
+			.then(pets=>{
+				return res.status(200).json({pets})
+			})
+			.catch(e=>console.log(e))
+
 })
 
 router.post('/flyer', uploadCloud.array('images'), (req, res, next)=>{
-	console.log(req.body, req.files)
-  /*Pet.create({ ...req.body, petPhotos: req.file.url, rescuedBy:req.user._id })
+
+	let {characteristics} = req.body;
+	delete req.body.characteristics;
+	characteristics = JSON.parse(characteristics);
+	characteristics = Object.keys(characteristics).filter(key => {
+		if(characteristics[key]) return key;
+	});
+
+	let petPhotos = req.files.map(file => {
+		return file.secure_url;
+	});
+
+  Pet.create({ ...req.body, petPhotos, rescuedBy:"5c87370a5d3eeaab69372793", characteristics })
 			.then(pet => {
 				res.status(201).json(pet)
 			})
-			.catch(e => res.json(e))*/
+			.catch(e => res.json(e))
 })
 
 router.get('/lost/:id', (req, res, next)=>{

@@ -2,10 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 let petSchema = new Schema ({
-	petPhotos: [{
-		type: String,
-		required: "Cada mascota necesita al menos una fotografía"
-	}],
+	petPhotos: {
+		type: [String],
+		required: "Todos tiene foto ese"
+	},
 	name: {
 		type: String,
 		required: "Cada mascota necesita un nombre",
