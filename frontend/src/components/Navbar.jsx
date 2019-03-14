@@ -2,22 +2,44 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 
+const url = process.env.NODE_ENV !== "Production" ? "http://localhost:3000" : "tupinshidominio.com";
+
 class NavBar extends React.Component {
 
 	state={
-		user:{},
-		logged:{}
+    privateInfo: {},
+    authorized: false,
+    profilePic: {},
 	}
 
-	logOut = () => {
-		axios.get("http://localhost:3000/logout", { withCredentials: true })
+  componentDidMount() {
+    this.getPrivateData()
+  }
+
+  getPrivateData = () => {
+    axios.get(`${url}/profile`, { withCredentials: true })
+        .then(res => {
+          console.log(res)
+          this.setState({ privateInfo: res.data, authorized: true, profilePic: res.data.profilePhoto })
+        })
+        .catch(e => {
+          console.log(e)
+         // this.props.history.push('/login')
+        })
+  }
+
+	logOut = () =>{
+      console.log(this.props)
+		  axios.get("http://localhost:3000/logout", { withCredentials: true })
 				.then(res => {
 					console.log(res)
+         this.props.history.push('/')
 				})
+        .catch(e=>console.log(e))
   }
 
   render(){
-    if(true) {
+    if(!this.state.authorized) {
       return(
         <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
           <nav className="uk-navbar-container"> 
@@ -50,10 +72,10 @@ class NavBar extends React.Component {
                   <li className="uk-navbar-item uk-logo"><NavLink to="/"><img src="/images/LOST-BK.png" alt="Lost Logo" width="150px" /></NavLink></li>
                   <li>
                     <a href="/profile">Perfil</a>
-                    <div class="uk-navbar-dropdown" uk-dropdown>
-                      <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <li><a href="/login">Reportar</a></li>
-                        <li><a href="/signup">Log Out</a></li>
+                    <div className="uk-navbar-dropdown" uk-dropdown="offset: 0">
+                      <ul className="uk-nav uk-navbar-dropdown-nav">
+                        <li><a href="/flyer">Reportar</a></li>
+                        <li onClick={this.logOut}><a href="#!">Log Out</a></li>
                       </ul>
                     </div>
                   </li>

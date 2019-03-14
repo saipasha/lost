@@ -12,10 +12,10 @@ class Signup extends React.Component {
 			size: "",
 			description: "",
 			characteristics: {
-				loquesea: false,
-				loquesea1: false,
-				loquesea2: false,
-				loquesea3: false
+				lastimado: false,
+				moribundo: false,
+				saludable: false,
+				asustado: false,
 			},
 			images: []
 		}
@@ -24,6 +24,8 @@ class Signup extends React.Component {
 	handleChange = e => {
 		const {data} = this.state;
 		let field = e.target.name;
+		let años = e.target.value.replace(/[Z-zñÑ]/g, "");
+		console.log(años)
 		data[field] = e.target.value;
 		this.setState({data});
 	};
@@ -70,7 +72,7 @@ class Signup extends React.Component {
 		createReport(formdata)
 				.then(res=>{
 					UIkit.notification({
-						message: "Chi",
+						message: "Se creó la mascota correctamente",
 						status: "success",
 					})
 					this.props.history.push('/lost')
@@ -79,10 +81,10 @@ class Signup extends React.Component {
 
 	render() {
 		const  {name, age, size} = this.state;
-		const {loquesea, loquesea1, loquesea2, loquesea3} = this.state.data.characteristics;
+		const {lastimado, asustado, moribundo, saludable} = this.state.data.characteristics;
 		return (
 				<div>
-					<div className="uk-text-center">
+					<div className="uk-text-center uk-margin-large-top">
 						<Link to="/"><img src="/images/LOST-BK.png" alt="Lost Logo" width="150px" /></Link>
 						<div>
 							<h4>Levanta un Reporte</h4>
@@ -94,34 +96,34 @@ class Signup extends React.Component {
 						<form className="uk-form-stacked uk-width-1-2" onSubmit={this.handleSubmit}>
 
 							<div className="uk-margin">
-								<label className="uk-form-label" htmlFor="pet-name">Nombre de tu c-kan</label>
+								<label className="uk-form-label" htmlFor="pet-name">Nombre de la Mascota</label>
 								<div className="uk-form-controls">
 									<input
 											name="name"
 											className="uk-input"
 											id="pet-name"
 											type="text"
-											placeholder="El name de tu can"
+											placeholder="Firulais"
 											onChange={this.handleChange}
 											value={name} />
 								</div>
 							</div>
 
 							<div className="uk-margin">
-								<label className="uk-form-label" htmlFor="pet-age">Edad de tu c-kan</label>
+								<label className="uk-form-label" htmlFor="pet-age">Cuántos años tiene?</label>
 								<div className="uk-form-controls">
 									<input
 											name="age"
 											className="uk-input"
 											id="pet-age" type="text"
-											placeholder="Años perro"
+											placeholder="5"
 											onChange={this.handleChange}
 											value={age} />
 								</div>
 							</div>
 
 							<div className="uk-margin">
-								<label className="uk-form-label" htmlFor="desc">Edad de tu c-kan</label>
+								<label className="uk-form-label" htmlFor="desc">Descripción</label>
 								<div className="uk-form-controls">
 									<textarea
 											className="uk-textarea"
@@ -130,18 +132,18 @@ class Signup extends React.Component {
 											cols="10"
 											rows="5"
 											onChange={this.handleChange}
-											placeholder="describe al c-kan"></textarea>
+											placeholder="Ojos marrones, orejas largas, nariz rosada. Cruza de beagle con pekinés. Pelo largo. Se encontró en…"></textarea>
 								</div>
 							</div>
 
 							<div className="uk-margin">
 								<div className="uk-width-1-1" uk-form-custom="target: > * > span:first-child">
 									<select defaultValue={size} onChange={this.handleSizeChange}>
-										<option disabled selected>Tamaño de tu c-kan</option>
-										<option value="small">Pequeño tu c-kan</option>
-										<option value="medium">Mediano tu c-kan</option>
-										<option value="large">Grande tu c-kan</option>
-										<option value="xlarge">XGrande tu c-kan</option>
+										<option disabled selected>Tamaño de la Mascota</option>
+										<option value="small">Pequeño</option>
+										<option value="medium">Mediano</option>
+										<option value="large">Grande</option>
+										<option value="xlarge">XGrande</option>
 									</select>
 									<button className="uk-button uk-button-default uk-width-1-1" type="button" tabIndex="-1">
 										<span></span>
@@ -151,23 +153,23 @@ class Signup extends React.Component {
 							</div>
 
 							<div className="uk-margin ">
-								<h4>Condiciones de tu c-kan</h4>
+								<h4>Condiciones en que se encontró</h4>
 								<div className="uk-grid-small uk-child-width-auto uk-grid">
-									<label><input className="uk-checkbox" type="checkbox" value="loquesea" name="loquesea" checked={loquesea} onChange={this.handleChangeCharacteristics}/> lo que sea </label>
-									<label><input className="uk-checkbox" type="checkbox" value="loquesea1" name="loquesea1" checked={loquesea1} onChange={this.handleChangeCharacteristics}/> no se</label>
-									<label><input className="uk-checkbox" type="checkbox" value="loquesea2" name="loquesea2" checked={loquesea2} onChange={this.handleChangeCharacteristics}/> epale epale no me pegues</label>
-									<label><input className="uk-checkbox" type="checkbox" value="loquesea3" name="loquesea3" checked={loquesea3} onChange={this.handleChangeCharacteristics}/> x fa</label>
+									<label><input className="uk-checkbox" type="checkbox" value="saludable" name="saludable" checked={saludable} onChange={this.handleChangeCharacteristics}/> Saludable </label>
+									<label><input className="uk-checkbox" type="checkbox" value="asustado" name="asustado" checked={asustado} onChange={this.handleChangeCharacteristics}/> Asustado </label>
+									<label><input className="uk-checkbox" type="checkbox" value="lastimado" name="lastimado" checked={lastimado} onChange={this.handleChangeCharacteristics}/> Lastimado</label>
+									<label><input className="uk-checkbox" type="checkbox" value="moribundo" name="moribundo" checked={moribundo} onChange={this.handleChangeCharacteristics}/> Moribundo </label>
 								</div>
 							</div>
 
 							<div className="uk-margin">
 								<div className="js-upload uk-width-1-1" uk-form-custom="true">
 									<input type="file" multiple onChange={this.handleChangeImages}/>
-									<button className="uk-button uk-button-default" type="button" tabIndex="-1">Selecciona las imagenes de tu c-kan</button>
+									<button className="uk-button uk-button-default" type="button" tabIndex="-1">Añade Fotos de la Mascota</button>
 								</div>
 							</div>
 
-							<button type="submit" className="uk-button uk-button-primary uk-width-1-3 uk-display-block uk-margin-auto">Picatelo</button>
+							<button type="submit" className="uk-button uk-button-primary uk-width-1-3 uk-display-block uk-margin-large-bottom">Reportar</button>
 
 						</form>
 					</div>

@@ -34,13 +34,26 @@ class Profile extends React.Component {
 		console.log(this.state.profilePic)
 		return(
 			<div>
-				<NavBar />
+				<NavBar {...this.props}/>
 				<div className="uk-text-center">
 					<div className="uk-margin-large-top">
-						<img src={this.state.profilePic} width="300px"/>
+						<img src={this.state.profilePic} width="300px" className="rounded-photo" />
 						<h2>Bienvenido, {this.state.privateInfo.name}</h2>
-						<img src={this.state.privateInfo.photo} alt={this.state.privateInfo.name}/>
-
+						<img src={this.state.privateInfo.photo} alt={this.state.privateInfo.name} />
+					</div>
+					<div className="uk-flex-around">
+						<div className="uk-align-left uk-margin-xlarge-left">
+							<h4>Tu Información</h4>
+							<p>Nombre: {this.state.privateInfo.name} {this.state.privateInfo.lastName}</p>
+							<p>Email: {this.state.privateInfo.email}</p>
+							<p>Celular: {this.state.privateInfo.phone}</p>
+						</div>
+						<div>
+							<h4>Tus reportes</h4>
+							<p>Aún no tienes reportes</p>
+							<Link to="flyer"><button className="uk-button uk-button-default">Levanta un Reporte</button></Link>
+						</div>
+					</div>
 				</div>
 			</div>
 		)

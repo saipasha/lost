@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import {searchByDescription} from "../services/report-services"
+import NavBar from "./Navbar";
 
 const url = process.env.NODE_ENV !== "Production" ? "http://localhost:3000" : "tupinshidominio.com";
 
@@ -37,6 +38,7 @@ class Lost extends React.Component {
     if (pets.length > 0) {
       return pets.map((pet, key)=>{
         return (
+            <div>
             <div className="uk-card uk-card-default uk-grid-collapse uk-child-width-1-3 uk-margin" uk-grid="true" key={key}>
               <div>
                 <div className="uk-card-media-left uk-cover-container">
@@ -62,17 +64,20 @@ class Lost extends React.Component {
               <div>
                 <div className="uk-card-body">
                   <h3 className="uk-card-title">{pet.name}</h3>
+                  <p>{pet.age} años</p>
                   <p>{pet.description}</p>
-                  {/*<p>{pet.description}</p>*/}
+                  <p>{pet.characteristics}</p>
+                  <p></p>
                 </div>
               </div>
             </div>
+          </div>
         )
       })
     } else {
       return (
           <div>
-            <h3>Lol</h3>
+            <h3 className="uk-margin-large-left"> No hay ningún reporte </h3>
           </div>
       )
     }
@@ -81,12 +86,14 @@ class Lost extends React.Component {
   render() {
     return (
       <div>
-        <h3>Perros Perdidos</h3>
-        <div className="uk-margin">
-          <form className="uk-search uk-search-default">
-            <a href="" uk-search-icon="true"></a>
-            <input onChange={this.searchWhileTyping} className="uk-search-input" type="search" placeholder="Search..." />
-          </form>
+        <NavBar {...this.props} />
+        <div className="uk-flex uk-margin-medium-top">
+          <div className="uk-margin">
+            <form className="uk-search uk-search-default uk-margin-large-left">
+              <a href="#" uk-search-icon="true"></a>
+              <input onChange={this.searchWhileTyping} className="uk-search-input" type="search" placeholder="Search..." />
+            </form>
+          </div>
         </div>
         {this.drawReports()}
       </div>

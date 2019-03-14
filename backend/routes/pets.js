@@ -31,7 +31,6 @@ router.get('/lost', (req, res, next)=>{
 })
 
 router.post('/flyer', uploadCloud.array('images'), (req, res, next)=>{
-
 	let {characteristics} = req.body;
 	delete req.body.characteristics;
 	characteristics = JSON.parse(characteristics);

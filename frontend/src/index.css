@@ -40,6 +40,7 @@ code {
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+  height: 80vh;
 }
 
 .banner > h2 {
@@ -63,4 +64,8 @@ code {
 
 .banner img {
   width: 80vw;
+}
+
+.rounded-photo {
+  border-radius: 100px;
 }
